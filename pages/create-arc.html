@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cоздание темы</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome для иконок (например, для стрелок новостей) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Slick Carousel CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <!-- <link rel="stylesheet" href="./css/reset.css" /> -->
+    <link rel="stylesheet" href="../css/create-arc.css" />
+  </head>
+  <body>
+    <!-- Шапка сайта -->
+    <header class="bg-light py-3">
+      <nav class="header__nav">
+        <ul class="header__left">
+          <li>
+            <a href="../index.html"><h1>Криптомонитор</h1></a>
+          </li>
+        </ul>
+        <ul class="header__right">
+          <li class="forum"><a href="../pages/forum.html">Форум</a></li>
+          <!-- <li>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#authModal"
+            >
+              Авторизация
+            </button>
+          </li> -->
+          <li>
+            <a href="../pages/profile.html">
+              <div class="user__profile">
+                <span class="user__nickname">user nickname</span>
+                <img
+                  class="user__avatar"
+                  src="../assets/img/avatar_profile.png"
+                  alt="avatar_user"
+                />
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <div class="create__form">
+        <h5>Создание новой темы</h5>
+        <input
+          type="text"
+          placeholder="Заголовок..."
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-default"
+        />
+        <input
+          type="text"
+          placeholder="Введите ваше сообщение..."
+          class="form-control"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-lg"
+        />
+        <ul></ul>
+        <div class="bnts">
+          <button class="btn btn-primary">Создать тему</button>
+          <button class="btn btn-secondary">
+            <a href="../pages/forum.html">Отмена</a>
+          </button>
+        </div>
+      </div>
+    </main>
+    <!-- Подвал сайта -->
+    <footer class="bg-light py-3">
+      <div class="container text-center">
+        <p>
+          © 2024 Криптомонитор. Контакты:
+          <a href="mailto:info@example.com">info@example.com</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap и скрипты -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Slick Carousel JS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+    <script src="../js/index.js"></script>
+  </body>
+</html>

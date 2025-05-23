@@ -1,0 +1,163 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul{
+    list-style-type: none;
+}
+
+a{
+    color: inherit; 
+    text-decoration: inherit; 
+}
+
+a:hover{
+    color: inherit; 
+    text-decoration: inherit; 
+}
+
+.header__nav{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-inline: 200px;
+    border-top: 50px;
+}
+
+.header__left{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+}
+
+.header__right{
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+    justify-content: end;
+}
+
+.forum{
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.user__profile{
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+}
+
+.user__nickname{
+    font-size: large;
+    font-weight: bold;
+}
+
+.user__avatar{
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Дополнительные стили для адаптивности и оформления */
+
+.news-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    height: 200px; /* Фиксированная высота */
+    overflow: hidden; /* Скрываем все, что выходит за пределы высоты */
+    position: relative; /* Для позиционирования многоточия */
+    cursor: pointer;
+}
+.news-item p {
+    margin-bottom: 0; /* Убираем отступы у текста */
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* Количество строк */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.crypto-table {
+    margin-top: 20px;
+}
+
+/* Стили для карусели новостей */
+.news-carousel {
+    margin-bottom: 20px;
+}
+
+.slick-prev, .slick-next {
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1; /* Чтобы стрелки были поверх новостей */
+    color: #333; /* Цвет стрелок */
+    background: none;
+    border: none;
+}
+
+.slick-prev {
+    left: -25px; /* Расположение стрелки слева */
+}
+
+.slick-next {
+    right: -25px; /* Расположение стрелки справа */
+}
+
+.slick-prev:before, .slick-next:before {
+    font-family: 'FontAwesome';
+    font-size: 24px;
+    color: #333; /* Цвет стрелок */
+}
+
+.slick-prev:before {
+    content: '\f104'; /* Unicode для стрелки влево */
+}
+
+.slick-next:before {
+    content: '\f105'; /* Unicode для стрелки вправо */
+}
+
+.slick-dots {
+    display: none !important; /* Скрываем точки навигации */
+}
+
+.change-up {
+    color: green;
+}
+.change-down {
+    color: red;
+}
+.sortable:hover {
+    cursor: pointer;
+}
+
+.slick-slide {
+  margin: 0 10px; /* Расстояние между новостями */
+}
+
+.slick-list {
+  margin: 0 -10px; /* Компенсируем отступы для первого и последнего элемента */
+}
+
+/* Стили для выпадающих списков */
+.row.mb-3 {
+  margin-bottom: 20px !important;
+}
+
+.form-control {
+  margin-top: 5px;
+}

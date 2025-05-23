@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Новости</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome для иконок (например, для стрелок новостей) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Slick Carousel CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <link rel="stylesheet" href="../css/news.css" />
+  </head>
+  <body>
+    <!-- Шапка сайта -->
+    <header class="bg-light py-3">
+      <nav class="header__nav">
+        <ul class="header__left">
+          <li>
+            <a href="../index.html"><h1>Криптомонитор</h1></a>
+          </li>
+        </ul>
+        <ul class="header__right">
+          <li class="forum"><a href="../pages/forum.html">Форум</a></li>
+          <!-- <li>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#authModal"
+            >
+              Авторизация
+            </button>
+          </li> -->
+          <li>
+            <a href="../pages/profile.html">
+              <div class="user__profile">
+                <span class="user__nickname">user nickname</span>
+                <img
+                  loading="lazy"
+                  class="user__avatar"
+                  src="../assets/img/avatar_profile.png"
+                  alt="avatar_user"
+                />
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- основная часть сайта -->
+    <main>
+      <!-- вся общая секция новостей -->
+      <h2>Последние новости</h2>
+      <section class="news">
+        <!-- карточка новости -->
+        <div class="news__card">
+          <div class="news__card-img">
+            <img
+              class="news__card-img"
+              src="../assets/img/base1.png"
+              alt=""
+              loading="lazy"
+            />
+          </div>
+          <div class="news__card-content">
+            <span class="news__card-title"
+              >«Европейский Союз вводит новые правила для криптовалютных
+              операций»</span
+            >
+            <p class="news__card-text">
+              С 2024 года Европейский Союз начинает применять регулирование MiCA
+              (Markets in Crypto-Assets), направленное на защиту инвесторов и
+              борьбу с отмыванием денег...
+            </p>
+          </div>
+        </div>
+
+        <div class="news__card">
+          <div class="news__card-img">
+            <img
+              class="news__card-img"
+              src="../assets/img/base2.png"
+              alt=""
+              loading="lazy"
+            />
+          </div>
+          <div class="news__card-content">
+            <span class="news__card-title"
+              >«Ethereum 2.0: Как обновление повлияет на скорость
+              транзакций»</span
+            >
+            <p class="news__card-text">
+              Апгрейд Ethereum 2.0, завершенный в 2023 году, перевел сеть на
+              алгоритм Proof-of-Stake, сократив энергопотребление на 99%.
+              Благодаря шардингу (разделению данных) пропускная способность
+              блокчейна выросла до 100 000 транзакций в секунду...
+            </p>
+          </div>
+        </div>
+
+        <div class="news__card">
+          <div class="news__card-img">
+            <img
+              class="news__card-img"
+              src="../assets/img/base3.png"
+              alt=""
+              loading="lazy"
+            />
+          </div>
+          <div class="news__card-content">
+            <span class="news__card-title">
+              «Стейблкоины набирают популярность среди инвесторов в 2025
+              году»</span
+            >
+            <p class="news__card-text">
+              По данным аналитиков, объем стейблкоинов (USDT, USDC) в 2023 году
+              вырос на 40%, достигнув $150 млрд. Их стабильность, обеспеченная
+              долларом или золотом, привлекает инвесторов в периоды
+              волатильности Bitcoin...
+            </p>
+          </div>
+        </div>
+
+        <div class="news__card">
+          <div class="news__card-img">
+            <img
+              class="news__card-img"
+              src="../assets/img/base4.png"
+              alt=""
+              loading="lazy"
+            />
+          </div>
+          <div class="news__card-content">
+            <span class="news__card-title"
+              >«Сальвадор запускает государственный биткоин-кошелек: Что
+              изменится для граждан?»</span
+            >
+            <p class="news__card-text">
+              Правительство Сальвадора анонсировало запуск официального
+              биткоин-кошелька «Chivo Wallet», интегрированного с национальной
+              ID-системой. По заявлению президента Найиба Букеле, кошелек
+              позволит мгновенно конвертировать BTC в доллары и оплачивать
+              коммунальные услуги...
+            </p>
+          </div>
+        </div>
+
+        <div class="news__card">
+          <div class="news__card-img">
+            <img
+              class="news__card-img"
+              src="../assets/img/base5.png"
+              alt=""
+              loading="lazy"
+            />
+          </div>
+          <div class="news__card-content">
+            <span class="news__card-title"
+              >«Зеленый майнинг: Исландия становится центром экологичного
+              Bitcoin»</span
+            >
+            <p class="news__card-text">
+              Благодаря геотермальной энергии Исландия привлекла 15% мировых
+              майнинговых мощностей Bitcoin. Компании вроде GreenBlocks
+              используют 100% ВИЭ, сокращая углеродный след на 90% compared с
+              угольными регионами...
+            </p>
+          </div>
+        </div>
+
+        <div class="news__card">
+          <div class="news__card-img">
+            <img
+              class="news__card-img"
+              src="../assets/img/base6.png"
+              alt=""
+              loading="lazy"
+            />
+          </div>
+          <div class="news__card-content">
+            <span class="news__card-title"
+              >«NFT-искусство в музеях: Как криптоарт меняет культурное
+              наследие»</span
+            >
+            <p class="news__card-text">
+              Музей современного искусства в Нью-Йорке (MoMA) приобрел
+              NFT-работу художника Пакера для постоянной коллекции. Работа,
+              созданная на блокчейне Ethereum, отражает тему цифровой
+              идентичности...
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="bg-light py-3">
+      <div class="container text-center">
+        <p>
+          © 2024 Криптомонитор. Контакты:
+          <a href="mailto:info@example.com">info@example.com</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap и скрипты -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Slick Carousel JS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+  </body>
+</html>

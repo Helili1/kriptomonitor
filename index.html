@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Криптомонитор</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Font Awesome для иконок (например, для стрелок новостей) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Slick Carousel CSS -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+    <!-- <link rel="stylesheet" href="./css/reset.css" /> -->
+    <link rel="stylesheet" href="../css/index.css">
+  </head>
+  <body>
+    <!-- Шапка сайта -->
+    <header class="bg-light py-3">
+      <nav class="header__nav">
+        <ul class="header__left">
+          <li>
+            <a href="../index.html"><h1>Криптомонитор</h1></a>
+          </li>
+        </ul>
+        <ul class="header__right">
+          <li class="forum"><a href="../pages/forum.html">Форум</a></li>
+          <li>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#authModal"
+            >
+              Авторизация
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Модальное окно авторизации -->
+    <div
+      class="modal fade"
+      id="authModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="authModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="authModalLabel">Авторизация</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="login">Логин</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="login"
+                  placeholder="Введите логин"
+                />
+              </div>
+              <div class="form-group">
+                <label for="password">Пароль</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  placeholder="Введите пароль"
+                />
+              </div>
+              <div class="form-group form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="rememberMe"
+                />
+                <label class="form-check-label" for="rememberMe"
+                  >Запомнить меня</label
+                >
+              </div>
+              <p>
+                Нет аккаунта?
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#registerModal"
+                  data-dismiss="modal"
+                  >Зарегистрироваться</a
+                >
+              </p>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Закрыть
+            </button>
+            <button type="button" class="btn btn-primary">Войти</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Модальное окно регистрации -->
+    <div
+      class="modal fade"
+      id="registerModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="registerModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerModalLabel">Регистрация</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="registrationForm">
+              <div class="form-group">
+                <label for="email">Почта</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Введите почту"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="displayName">Отображаемое имя</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="displayName"
+                  placeholder="Введите отображаемое имя"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="registerPassword">Пароль</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="registerPassword"
+                  placeholder="Введите пароль"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Подтвердите пароль</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                  placeholder="Подтвердите пароль"
+                  required
+                />
+              </div>
+              <div
+                id="registerError"
+                class="text-danger"
+                style="display: none"
+              ></div>
+              <p>
+                Уже есть аккаунт?
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-dismiss="modal"
+                  data-target="#authModal"
+                  >Войти</a
+                >
+              </p>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Закрыть
+            </button>
+            <button type="button" class="btn btn-primary" id="registerButton">
+              Зарегистрироваться
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Основное содержимое сайта -->
+    <main class="container my-4">
+      <!-- Блок с новостями -->
+       <section class="news">
+      <div class="row">
+        <div class="col-md-12">
+          <a href="../pages/news.html"><h2>Новости</h2></a>
+          <div class="news-carousel">
+            <div class="news-item">
+              <p class="news__title"><h5>«Цифровой юань: Как Китай тестирует CBDC для мировой экономики»</h5></p>
+              <p class="news__content">
+                Китай ускорил внедрение цифрового юаня (CBDC), проведя пилотные тесты в 23 городах. Цифровая валюта позволяет отслеживать транзакции в режиме...
+              </p>
+            </div>
+            <div class="news-item">
+              <p class="news__title"><h5>«Хакеры украли $200 млн из криптокошельков: Как защитить активы»</h5></p>
+              <p>
+                В июле 2024 года злоумышленники взломали смарт-контракты DeFi-платформы QuantumSwap, похитив средства клиентов. Эксперты советуют использовать...
+              </p>
+            </div>
+            <div class="news-item">
+              <p class="news__title"><h5>«Криптовалюты спасают жизни: Благотворительность в эпоху блокчейна»</h5></p>
+              <p>
+                Фонд The Giving Block собрал за 2025 год $130 млн в биткоинах и Ethereum для помощи жертвам стихийных бедствий. Криптопожертвования ускоряют перевод...
+              </p>
+            </div>
+            <div class="news-item">
+              <p class="news__title"><h5>«Игры на блокчейне: Заработок или пузырь?»</h5></p>
+              <p>
+                Play-to-Earn проекты вроде Axie Infinity привлекли 5 млн игроков, позволяя зарабатывать NFT и токены. Но спад рынка в 2025 году обрушил стоимость внутриигровых активов на 70%. Геймеры жалуются на мошенничество, а разработчики ищут баланс между экономикой и развлечением.
+              </p>
+            </div>
+            <div class="news-item">
+              <p class="news__title"><h5>«Индия запрещает криптовалюты: Что будет с инвесторами?»</h5></p>
+              <p>
+                Правительство Индии ввело полный запрет на торговлю и майнинг криптовалют с 1 сентября 2023 года. Нарушителям грозит штраф до $30 000...
+              </p>
+            </div>
+            <!-- Добавьте больше новостей по необходимости -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="table">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="dataSource">Источник данных:</label>
+        <select class="form-control" id="dataSource">
+          <option value="source1">CoinGecko</option>
+          <option value="source2">Binance</option>
+          <option value="source3">CryptoCompare</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="sortOption">Сортировка:</label>
+        <select class="form-control" id="sortOption">
+          <option value="default">По умолчанию</option>
+          <option value="name">По имени</option>
+          <option value="price">По цене</option>
+          <option value="change">По изменению цены</option>
+        </select>
+      </div>
+    </div>
+      <!-- Таблица с криптовалютами -->
+      <div class="row">
+        <div class="col-md-12 crypto-table">
+          <h2>Курсы криптовалют</h2>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>№</th>
+                <th>Криптовалюта</th>
+                <th>Цена (USD)</th>
+                <th>Изменение (24ч)</th>
+              </tr>
+            </thead>
+            <tbody id="cryptoTableBody">
+              <!-- Строки таблицы будут созданы динамически -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <!-- Подвал сайта -->
+    <footer class="bg-light py-3">
+      <div class="container text-center">
+        <p>
+          © 2024 Криптомонитор. Контакты:
+          <a href="mailto:info@example.com">info@example.com</a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap и скрипты -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Slick Carousel JS -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+    <script src="../js/index.js"></script>
+  </body>
+</html>
