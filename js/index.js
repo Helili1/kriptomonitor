@@ -6,35 +6,37 @@ $(document).ready(function () {
       { name: "Ethereum (ETH)", price: 1980, change: "-1.2%" },
       { name: "Cardano (ADA)", price: 0.48, change: "+0.5%" },
       { name: "Solana (SOL)", price: 42, change: "+3.1%" },
-      { name: "Polygon (MATIC)", price: 0.75, change: "-0.8%" }
+      { name: "Polygon (MATIC)", price: 0.75, change: "-0.8%" },
     ],
     source2: [
       { name: "Bitcoin (BTC)", price: 30180, change: "+1.8%" },
       { name: "BNB (BNB)", price: 245, change: "+0.5%" },
       { name: "Ripple (XRP)", price: 0.52, change: "-0.3%" },
       { name: "Dogecoin (DOGE)", price: 0.065, change: "+2.5%" },
-      { name: "Polkadot (DOT)", price: 5.2, change: "+1.1%" }
+      { name: "Polkadot (DOT)", price: 5.2, change: "+1.1%" },
     ],
     source3: [
       { name: "Bitcoin (BTC)", price: 30310, change: "+2.1%" },
       { name: "Litecoin (LTC)", price: 85, change: "-1.5%" },
       { name: "Chainlink (LINK)", price: 14.5, change: "+0.8%" },
       { name: "Stellar (XLM)", price: 0.12, change: "+0.2%" },
-      { name: "Uniswap (UNI)", price: 5.8, change: "-0.5%" }
-    ]
+      { name: "Uniswap (UNI)", price: 5.8, change: "-0.5%" },
+    ],
   };
 
   // Функция заполнения таблицы
   function fillTable(data) {
     const cryptoTableBody = $("#cryptoTableBody");
     cryptoTableBody.empty(); // Очищаем таблицу
-    
+
     data.forEach((crypto, index) => {
       const row = `<tr>
                 <td>${index + 1}</td>
                 <td>${crypto.name}</td>
                 <td>${crypto.price}</td>
-                <td class="${crypto.change.startsWith("+") ? "change-up" : "change-down"}">${crypto.change}</td>
+                <td class="${
+                  crypto.change.startsWith("+") ? "change-up" : "change-down"
+                }">${crypto.change}</td>
             </tr>`;
       cryptoTableBody.append(row);
     });
@@ -44,7 +46,7 @@ $(document).ready(function () {
   fillTable(dataSources.source1);
 
   // Обработчик изменения источника данных
-  $("#dataSource").change(function() {
+  $("#dataSource").change(function () {
     const source = $(this).val();
     fillTable(dataSources[source]);
   });
@@ -55,30 +57,40 @@ $(document).ready(function () {
   let isAscendingChange = true;
 
   // Обработчик изменения сортировки
-  $("#sortOption").change(function() {
+  $("#sortOption").change(function () {
     const sortType = $(this).val();
-    
+
     if (sortType === "default") {
       const source = $("#dataSource").val();
       fillTable(dataSources[source]);
       return;
     }
-    
+
     // Используем логику сортировки
     const rows = $("#cryptoTableBody tr").toArray();
 
     rows.sort((a, b) => {
       if (sortType === "price") {
-        const aValue = parseFloat($(a).find("td:eq(2)").text().replace(",", ""));
-        const bValue = parseFloat($(b).find("td:eq(2)").text().replace(",", ""));
+        const aValue = parseFloat(
+          $(a).find("td:eq(2)").text().replace(",", "")
+        );
+        const bValue = parseFloat(
+          $(b).find("td:eq(2)").text().replace(",", "")
+        );
         return isAscendingPrice ? aValue - bValue : bValue - aValue;
       } else if (sortType === "name") {
         const aValue = $(a).find("td:eq(1)").text();
         const bValue = $(b).find("td:eq(1)").text();
-        return isAscendingName ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+        return isAscendingName
+          ? aValue.localeCompare(bValue)
+          : bValue.localeCompare(aValue);
       } else if (sortType === "change") {
-        const aValue = parseFloat($(a).find("td:eq(3)").text().replace("%", "").replace(",", "").trim());
-        const bValue = parseFloat($(b).find("td:eq(3)").text().replace("%", "").replace(",", "").trim());
+        const aValue = parseFloat(
+          $(a).find("td:eq(3)").text().replace("%", "").replace(",", "").trim()
+        );
+        const bValue = parseFloat(
+          $(b).find("td:eq(3)").text().replace("%", "").replace(",", "").trim()
+        );
         return isAscendingChange ? aValue - bValue : bValue - aValue;
       }
     });
@@ -96,7 +108,10 @@ $(document).ready(function () {
 
     // Обновляем индексы
     $("#cryptoTableBody tr").each((index, row) => {
-      $(row).children("td").first().text(index + 1);
+      $(row)
+        .children("td")
+        .first()
+        .text(index + 1);
     });
   });
 
@@ -104,7 +119,7 @@ $(document).ready(function () {
   $(".news-carousel").slick({
     dots: false,
     infinite: true,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     prevArrow: '<button type="button" class="slick-prev"></button>',
     nextArrow: '<button type="button" class="slick-next"></button>',
@@ -163,4 +178,75 @@ $(document).ready(function () {
       $("#registrationForm")[0].reset();
     }, 1000);
   });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // --- Бургер-меню ---
+  const burgerMenu = document.querySelector('.burger-menu');
+  const headerRight = document.querySelector('.header__right');
+  if (burgerMenu && headerRight) {
+    burgerMenu.addEventListener('click', function(e) {
+      this.classList.toggle('active');
+      headerRight.classList.toggle('active');
+      document.body.classList.toggle('menu-open', this.classList.contains('active'));
+      e.stopPropagation();
+    });
+    // Закрытие меню по клику вне меню или по затемнению
+    document.addEventListener('click', function(e) {
+      if (
+        document.body.classList.contains('menu-open') &&
+        !burgerMenu.contains(e.target) &&
+        !headerRight.contains(e.target)
+      ) {
+        burgerMenu.classList.remove('active');
+        headerRight.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
+    });
+  }
+
+  // --- Карусель новостей ---
+  if (window.jQuery && $('.news-carousel').length) {
+    $('.news-carousel').slick({
+      dots: false,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      prevArrow: '<button type="button" class="slick-prev" aria-label="Назад"><i class="fa fa-angle-left"></i></button>',
+      nextArrow: '<button type="button" class="slick-next" aria-label="Вперёд"><i class="fa fa-angle-right"></i></button>',
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    });
+    // Перемещаем стрелки вниз на мобильных/планшетах
+    function moveArrowsIfMobile() {
+      const arrows = document.querySelectorAll('.news-carousel .slick-arrow');
+      const arrowsContainer = document.querySelector('.news-carousel-arrows');
+      if (window.innerWidth <= 768 && arrowsContainer) {
+        arrows.forEach(arrow => arrowsContainer.appendChild(arrow));
+      } else {
+        const carousel = document.querySelector('.news-carousel');
+        arrows.forEach(arrow => carousel.appendChild(arrow));
+      }
+    }
+    moveArrowsIfMobile();
+    window.addEventListener('resize', moveArrowsIfMobile);
+  }
+
+  // --- Таблица криптовалют ---
+  // (оставляю существующую логику, если есть)
 });

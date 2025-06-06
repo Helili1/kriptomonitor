@@ -1,24 +1,25 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
 }
 
-ul{
+ul {
     list-style-type: none;
 }
 
-a{
-    color: inherit; 
-    text-decoration: inherit; 
+a {
+    color: inherit;
+    text-decoration: inherit;
 }
 
-a:hover{
-    color: inherit; 
-    text-decoration: inherit; 
+a:hover {
+    color: inherit;
+    text-decoration: inherit;
 }
 
-.header__nav{
+.header__nav {
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -28,14 +29,14 @@ a:hover{
     border-top: 50px;
 }
 
-.header__left{
+.header__left {
     display: flex;
     flex-direction: row;
     justify-content: start;
     align-items: start;
 }
 
-.header__right{
+.header__right {
     display: flex;
     flex-direction: row;
     gap: 80px;
@@ -44,120 +45,560 @@ a:hover{
     justify-content: end;
 }
 
-.forum{
+.forum {
     font-size: 30px;
     font-weight: 500;
 }
 
-.user__profile{
+.user__profile {
     display: flex;
     flex-direction: row;
     gap: 16px;
     align-items: center;
 }
 
-.user__nickname{
+.user__nickname {
     font-size: large;
     font-weight: bold;
 }
 
-.user__avatar{
+.user__avatar {
     object-fit: cover;
     width: 40px;
     height: 40px;
     border-radius: 50%;
 }
 
-/* Дополнительные стили для адаптивности и оформления */
+/* Стили для шапки */
+.header__nav {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    margin-inline: 200px;
+    padding: 20px 0;
+}
+
+.header__left {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+.header__right {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    justify-content: center;
+    align-items: center;
+}
+
+.forum {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+/* Стили для бургер-меню (как в news.css) */
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.burger-menu span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    transition: all 0.3s ease;
+}
+
+.burger-menu.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+
+.burger-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-menu.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* Стили для новостей */
+.news {
+    margin: 40px auto;
+    max-width: 1400px;
+    padding: 0 20px;
+}
+
+.news h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.news-carousel {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 40px;
+    position: relative;
+    padding-left: 70px;
+    padding-right: 70px;
+    background: none;
+}
 
 .news-item {
-    padding: 15px;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    height: 200px; /* Фиксированная высота */
-    overflow: hidden; /* Скрываем все, что выходит за пределы высоты */
-    position: relative; /* Для позиционирования многоточия */
-    cursor: pointer;
+    position: relative;
+    flex: 1 1 0;
+    min-width: 340px;
+    max-width: 400px;
+    background: #fff;
+    border: 1px solid #e3e6ea;
+    border-radius: 12px;
+    padding: 28px 22px 60px 22px;
+    box-shadow: none;
+    height: 240px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0;
+    transition: none;
 }
-.news-item p {
-    margin-bottom: 0; /* Убираем отступы у текста */
+
+.news-item:hover {
+    box-shadow: none;
+}
+
+.news__title h5 {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #181818;
+    margin-bottom: 14px;
+    line-height: 1.32;
+}
+
+.news__content {
+    color: #232323;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 0;
     display: -webkit-box;
-    -webkit-line-clamp: 5; /* Количество строк */
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
-}
-.crypto-table {
-    margin-top: 20px;
-}
-
-/* Стили для карусели новостей */
-.news-carousel {
-    margin-bottom: 20px;
+    height: 72px;
+    min-height: 72px;
+    padding-bottom: 22px;
 }
 
-.slick-prev, .slick-next {
-    font-size: 24px;
+.news__read-more {
+    position: absolute;
+    left: 22px;
+    bottom: 18px;
+    color: #1976d2;
+    font-size: 0.97rem;
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s;
+    z-index: 1;
+}
+
+.news__read-more:hover {
+    color: #0d47a1;
+}
+
+/* Стили для карусели */
+.slick-prev,
+.slick-next {
+    font-size: 38px;
     cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 1; /* Чтобы стрелки были поверх новостей */
-    color: #333; /* Цвет стрелок */
-    background: none;
-    border: none;
+    z-index: 10;
+    color: #181818;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 0;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.85;
+    transition: color 0.2s, opacity 0.2s;
+    margin-top: 0;
+    margin-bottom: 0;
+    pointer-events: auto;
+    overflow: visible;
 }
 
 .slick-prev {
-    left: -25px; /* Расположение стрелки слева */
+    left: -60px;
 }
 
 .slick-next {
-    right: -25px; /* Расположение стрелки справа */
+    right: -60px;
 }
 
-.slick-prev:before, .slick-next:before {
+.slick-prev:before,
+.slick-next:before {
     font-family: 'FontAwesome';
-    font-size: 24px;
-    color: #333; /* Цвет стрелок */
+    font-size: 38px;
+    color: #181818;
+    opacity: 1;
+    display: block;
+    content: '';
 }
 
 .slick-prev:before {
-    content: '\f104'; /* Unicode для стрелки влево */
+    content: '\f104';
 }
 
+/*  стрелки */
+
 .slick-next:before {
-    content: '\f105'; /* Unicode для стрелки вправо */
+    content: '\f105';
+}
+
+.slick-prev:hover:before,
+.slick-next:hover:before {
+    color: #1976d2;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    color: #1976d2;
+    opacity: 1;
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .slick-dots {
-    display: none !important; /* Скрываем точки навигации */
+    display: none !important;
+}
+
+.slick-slide {
+    margin: 0 10px;
+}
+
+.slick-list {
+    margin: 0 -10px;
+}
+
+/* Стили для таблицы */
+.crypto-table {
+    margin-top: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+}
+
+.table th {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Стили для выпадающих списков */
+.form-control {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Адаптивные стили */
+@media screen and (max-width: 1200px) {
+    .header__nav {
+        margin-inline: 50px;
+    }
+
+    .news-carousel {
+        gap: 16px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .news-item {
+        min-width: 260px;
+        max-width: 320px;
+        padding: 18px 10px 44px 10px;
+        height: 180px;
+    }
+
+    .slick-prev {
+        left: -38px;
+    }
+
+    .slick-next {
+        right: -38px;
+    }
+
+    .news__content {
+        height: 60px;
+        min-height: 60px;
+        padding-bottom: 18px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .header__nav {
+        margin-inline: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header__nav {
+        margin-inline: 20px;
+        justify-content: space-between;
+    }
+
+    .burger-menu {
+        display: flex;
+        z-index: 1101;
+    }
+
+    .header__right {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background: #fff;
+        flex-direction: column;
+        padding: 80px 20px 20px;
+        transition: right 0.3s cubic-bezier(.4, 0, .2, 1);
+        box-shadow: -2px 0 8px rgba(0, 0, 0, 0.12);
+        z-index: 1100;
+        align-items: flex-start;
+    }
+
+    .header__right.active {
+        right: 0;
+    }
+
+    .header__right li {
+        margin: 15px 0;
+    }
+
+    .news h2 {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    .news-carousel {
+        flex-direction: column;
+        gap: 18px;
+        padding-left: 0;
+        padding-right: 0;
+        position: relative;
+        margin-bottom: 60px;
+    }
+
+    .news-item {
+        max-width: 100%;
+        min-width: 0;
+        width: 100%;
+        height: auto;
+        padding: 14px 6px 38px 6px;
+    }
+
+    .news__content {
+        height: 72px;
+        min-height: 72px;
+        padding-bottom: 22px;
+    }
+
+    .news__read-more {
+        left: 6px;
+        bottom: 12px;
+        margin-top: 10px;
+    }
+
+    /* Стрелки снизу блока новостей */
+    .slick-prev,
+    .slick-next {
+        position: static;
+        display: inline-flex;
+        margin: 0 18px 0 0;
+        width: 48px;
+        height: 48px;
+        font-size: 32px;
+        top: auto;
+        left: auto;
+        right: auto;
+        transform: none;
+        vertical-align: middle;
+    }
+
+    .news-carousel .slick-arrow {
+        position: static !important;
+        margin: 0 10px 0 0;
+    }
+
+    .news-carousel-arrows {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -30px;
+        margin-bottom: 10px;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .news__card {
+        width: 100%;
+        max-width: 500px;
+        min-height: 320px;
+    }
+
+    .news__card-content {
+        padding: 15px;
+    }
+
+    .news__card-text {
+        min-height: 48px;
+        max-height: 48px;
+        font-size: 0.92rem;
+    }
+
+    .news__card-read-more {
+        margin-top: auto;
+        margin-bottom: 0;
+        left: 0;
+        position: static;
+        display: inline-block;
+    }
+
+    /* Затемнение фона при открытом меню */
+    body.menu-open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.25);
+        z-index: 1099;
+        pointer-events: auto;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .header__nav {
+        margin-inline: 10px;
+    }
+
+    .news-item {
+        padding: 15px;
+    }
+
+    .news__title {
+        font-size: 1.1rem;
+    }
+
+    .news__content {
+        font-size: 0.9rem;
+    }
 }
 
 .change-up {
     color: green;
 }
+
 .change-down {
     color: red;
 }
+
 .sortable:hover {
     cursor: pointer;
 }
 
-.slick-slide {
-  margin: 0 10px; /* Расстояние между новостями */
-}
-
-.slick-list {
-  margin: 0 -10px; /* Компенсируем отступы для первого и последнего элемента */
-}
-
 /* Стили для выпадающих списков */
 .row.mb-3 {
-  margin-bottom: 20px !important;
+    margin-bottom: 20px !important;
 }
 
 .form-control {
-  margin-top: 5px;
+    margin-top: 5px;
+}
+
+/* Отступы между выпадающими списками сортировки и источника данных */
+.row.mb-3>.col-md-6 {
+    margin-bottom: 16px;
+}
+
+.news__card {
+    height: auto;
+    min-height: 450px;
+    width: calc(33.333% - 20px);
+    min-width: 300px;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: white;
+    overflow: hidden;
+}
+
+.news__card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.news__card-text {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 60px;
+    max-height: 60px;
+    margin-bottom: 0;
+}
+
+.news__card-read-more {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-top: auto;
+    margin-bottom: 0;
+    display: inline-block;
+    position: static;
 }

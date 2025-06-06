@@ -27,22 +27,23 @@
     <!-- Шапка сайта -->
     <header class="bg-light py-3">
       <nav class="header__nav">
-        <ul class="header__left">
-          <li>
-            <a href="../index.html"><h1>Криптомонитор</h1></a>
-          </li>
-        </ul>
+        <div class="header__left">
+          <a href="index.html"><h1>Криптомонитор</h1></a>
+        </div>
+        <button class="burger-menu" aria-label="Меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <ul class="header__right">
-          <li class="forum"><a href="../pages/forum.html">Форум</a></li>
+          <li class="forum"><a href="pages/forum.html">Форум</a></li>
           <li>
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-toggle="modal"
-              data-target="#authModal"
-            >
-              Авторизация
-            </button>
+            <a href="pages/profile.html">
+              <div class="user__profile">
+                <span class="user__nickname">user nickname</span>
+                <img loading="lazy" class="user__avatar" src="assets/img/avatar_profile.png" alt="avatar_user" />
+              </div>
+            </a>
           </li>
         </ul>
       </nav>
@@ -234,35 +235,40 @@
             <div class="news-item">
               <p class="news__title"><h5>«Цифровой юань: Как Китай тестирует CBDC для мировой экономики»</h5></p>
               <p class="news__content">
-                Китай ускорил внедрение цифрового юаня (CBDC), проведя пилотные тесты в 23 городах. Цифровая валюта позволяет отслеживать транзакции в режиме...
+                Китай ускорил внедрение цифрового юаня (CBDC), проведя пилотные тесты в 23 городах...
               </p>
+              <a href="pages/news-detail-yuan.html" class="news__read-more">Читать далее</a>
             </div>
             <div class="news-item">
               <p class="news__title"><h5>«Хакеры украли $200 млн из криптокошельков: Как защитить активы»</h5></p>
-              <p>
-                В июле 2024 года злоумышленники взломали смарт-контракты DeFi-платформы QuantumSwap, похитив средства клиентов. Эксперты советуют использовать...
+              <p class="news__content">
+                В июле 2024 года злоумышленники взломали смарт-контракты DeFi-платформы QuantumSwap, похитив...
               </p>
+              <a href="pages/news-detail-hack.html" class="news__read-more">Читать далее</a>
             </div>
             <div class="news-item">
               <p class="news__title"><h5>«Криптовалюты спасают жизни: Благотворительность в эпоху блокчейна»</h5></p>
-              <p>
-                Фонд The Giving Block собрал за 2025 год $130 млн в биткоинах и Ethereum для помощи жертвам стихийных бедствий. Криптопожертвования ускоряют перевод...
+              <p class="news__content">
+                Фонд The Giving Block собрал за 2025 год $130 млн в биткоинах и Ethereum для...
               </p>
+              <a href="pages/news-detail-charity.html" class="news__read-more">Читать далее</a>
             </div>
             <div class="news-item">
               <p class="news__title"><h5>«Игры на блокчейне: Заработок или пузырь?»</h5></p>
-              <p>
-                Play-to-Earn проекты вроде Axie Infinity привлекли 5 млн игроков, позволяя зарабатывать NFT и токены. Но спад рынка в 2025 году обрушил стоимость внутриигровых активов на 70%. Геймеры жалуются на мошенничество, а разработчики ищут баланс между экономикой и развлечением.
+              <p class="news__content">
+                Play-to-Earn проекты вроде Axie Infinity привлекли 5 млн игроков, позволяя...
               </p>
+              <a href="pages/news-detail-games.html" class="news__read-more">Читать далее</a>
             </div>
             <div class="news-item">
               <p class="news__title"><h5>«Индия запрещает криптовалюты: Что будет с инвесторами?»</h5></p>
-              <p>
-                Правительство Индии ввело полный запрет на торговлю и майнинг криптовалют с 1 сентября 2023 года. Нарушителям грозит штраф до $30 000...
+              <p class="news__content">
+                Правительство Индии ввело полный запрет на торговлю и майнинг криптовалют с 1 сентября 2023 года...
               </p>
+              <a href="pages/news-detail-india.html" class="news__read-more">Читать далее</a>
             </div>
-            <!-- Добавьте больше новостей по необходимости -->
           </div>
+          <div class="news-carousel-arrows"></div>
         </div>
       </div>
     </section>
@@ -324,10 +330,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Slick Carousel JS -->
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-    ></script>
-    <script src="../js/index.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="js/index.js"></script>
   </body>
 </html>
