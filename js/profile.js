@@ -1,58 +1,162 @@
-$(document).ready(function () {
-  // Загрузка аватара в основном окне
-  $("#avatarInput").change(function (e) {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        $("#avatarPreview").attr("src", e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  });
-
-  // Заполнение полей модального окна при открытии
-  $("#editProfileModal").on("show.bs.modal", function () {
-    $("#editDisplayName").val($("#displayName").text().trim());
-    $("#editDescription").val($("#profileDescription").text().trim());
-    $("#editAvatar").val("");
-  });
-
-  // Сохранение изменений профиля
-  $("#saveProfileButton").click(function () {
-    const newDisplayName = $("#editDisplayName").val();
-    const newDescription = $("#editDescription").val();
-    const newAvatarFile = $("#editAvatar")[0].files[0];
-
-    // Обновляем отображаемое имя
-    if (newDisplayName.trim()) {
-      $("#displayName").text(newDisplayName);
+// Класс для работы с профилем
+class ProfileManager {
+    constructor() {
+        this.profileData = {
+            displayName: 'Имя пользователя',
+            email: 'user@example.com',
+            description: 'Здесь будет отображаться информация о пользователе. На данный момент описание отсутствует.',
+            avatar: '../assets/img/avatar_profile.png',
+            postsCount: 0,
+            viewsCount: 0,
+            notifications: false,
+            privacy: false
+        };
+        
+        this.init();
     }
 
-    // Обновляем описание
-    if (newDescription.trim()) {
-      $("#profileDescription").text(newDescription);
+    // Инициализация
+    init() {
+        this.loadProfile();
+        this.setupEventListeners();
+        this.updateUI();
     }
 
-    // Обновляем аватар (если файл был выбран)
-    if (newAvatarFile) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        $("#avatarPreview").attr("src", e.target.result);
-        $("#avatarInput").val(""); // Сбрасываем input в основном окне
-      };
-      reader.readAsDataURL(newAvatarFile);
+    // Загрузка данных профиля
+    loadProfile() {
+        const savedProfile = localStorage.getItem('userProfile');
+        if (savedProfile) {
+            this.profileData = JSON.parse(savedProfile);
+        }
     }
 
-    // Показываем уведомление
-    const toast = `<div class="alert alert-success fade show position-fixed" 
-                  style="bottom: 20px; right: 20px; z-index: 1000; min-width: 250px;">
-                  <i class="fas fa-check-circle mr-2"></i> Профиль обновлен
-                  </div>`;
-    $("body").append(toast);
-    setTimeout(() => $(".alert").alert("close"), 3000);
+    // Сохранение данных профиля
+    saveProfile() {
+        localStorage.setItem('userProfile', JSON.stringify(this.profileData));
+        this.showNotification('Профиль успешно обновлен', 'success');
+    }
 
-    // Закрываем модальное окно
-    $("#editProfileModal").modal("hide");
-  });
+    // Обновление UI
+    updateUI() {
+        // Основные данные
+        document.getElementById('displayName').textContent = this.profileData.displayName;
+        document.getElementById('userEmail').textContent = this.profileData.email;
+        document.getElementById('profileDescription').textContent = this.profileData.description;
+        document.getElementById('avatarPreview').src = this.profileData.avatar;
+        
+        // Статистика
+        document.getElementById('postsCount').textContent = this.profileData.postsCount;
+        document.getElementById('viewsCount').textContent = this.profileData.viewsCount;
+        
+        // Настройки
+        document.getElementById('notificationsToggle').checked = this.profileData.notifications;
+        document.getElementById('privacyToggle').checked = this.profileData.privacy;
+        
+        // Обновление данных в шапке
+        document.getElementById('headerNickname').textContent = this.profileData.displayName;
+        document.getElementById('headerAvatar').src = this.profileData.avatar;
+    }
+
+    // Настройка обработчиков событий
+    setupEventListeners() {
+        // Загрузка аватара
+        document.getElementById('avatarInput').addEventListener('change', (e) => this.handleAvatarUpload(e));
+        
+        // Открытие модального окна
+        document.getElementById('editProfileModal').addEventListener('show.bs.modal', () => {
+            document.getElementById('editDisplayName').value = this.profileData.displayName;
+            document.getElementById('editEmail').value = this.profileData.email;
+            document.getElementById('editDescription').value = this.profileData.description;
+        });
+        
+        // Сохранение профиля
+        document.getElementById('saveProfileButton').addEventListener('click', () => this.handleProfileSave());
+        
+        // Настройки
+        document.getElementById('notificationsToggle').addEventListener('change', (e) => {
+            this.profileData.notifications = e.target.checked;
+            this.saveProfile();
+        });
+        
+        document.getElementById('privacyToggle').addEventListener('change', (e) => {
+            this.profileData.privacy = e.target.checked;
+            this.saveProfile();
+        });
+    }
+
+    // Обработка загрузки аватара
+    handleAvatarUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                this.profileData.avatar = e.target.result;
+                this.updateUI();
+                this.saveProfile();
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    // Обработка сохранения профиля
+    handleProfileSave() {
+        const newDisplayName = document.getElementById('editDisplayName').value.trim();
+        const newEmail = document.getElementById('editEmail').value.trim();
+        const newDescription = document.getElementById('editDescription').value.trim();
+        const editAvatarInput = document.getElementById('editAvatar');
+        const newAvatarFile = editAvatarInput.files[0];
+        
+        if (!newDisplayName || !newEmail) {
+            this.showNotification('Пожалуйста, заполните все обязательные поля', 'error');
+            return;
+        }
+
+        // Если выбран новый аватар, читаем его и сохраняем, иначе сохраняем остальные поля сразу
+        if (newAvatarFile) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                this.profileData.avatar = e.target.result;
+                this.profileData.displayName = newDisplayName;
+                this.profileData.email = newEmail;
+                this.profileData.description = newDescription;
+                this.updateUI();
+                this.saveProfile();
+                // Сбросить поле выбора файла, чтобы можно было выбрать то же фото снова при необходимости
+                editAvatarInput.value = '';
+                // Закрываем модальное окно
+                $('#editProfileModal').modal('hide');
+            };
+            reader.readAsDataURL(newAvatarFile);
+        } else {
+            this.profileData.displayName = newDisplayName;
+            this.profileData.email = newEmail;
+            this.profileData.description = newDescription;
+            this.updateUI();
+            this.saveProfile();
+            $('#editProfileModal').modal('hide');
+        }
+    }
+
+    // Показ уведомлений
+    showNotification(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+            <span>${message}</span>
+        `;
+        
+        document.getElementById('notificationContainer').appendChild(notification);
+        
+        // Удаляем уведомление через 3 секунды
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => notification.remove(), 300);
+        }, 3000);
+    }
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', () => {
+    const profileManager = new ProfileManager();
 });

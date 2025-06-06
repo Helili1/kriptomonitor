@@ -27,11 +27,14 @@
     <!-- Шапка сайта -->
     <header class="bg-light py-3">
       <nav class="header__nav">
-        <ul class="header__left">
-          <li>
-            <a href="../index.html"><h1>Криптомонитор</h1></a>
-          </li>
-        </ul>
+        <div class="header__left">
+          <a href="../index.html"><h1>Криптомонитор</h1></a>
+        </div>
+        <button class="burger-menu" aria-label="Меню">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
         <ul class="header__right">
           <li class="forum"><a href="../pages/forum.html">Форум</a></li>
           <!-- <li>
@@ -47,7 +50,7 @@
           <li>
             <a href="../pages/profile.html">
               <div class="user__profile">
-                <span class="user__nickname">user nickname</span>
+                <span class="user__nickname" id="headerNickname">user nickname</span>
                 <img
                   class="user__avatar"
                   src="../assets/img/avatar_profile.png"
@@ -62,27 +65,35 @@
     <main>
       <div class="create__form">
         <h5>Создание новой темы</h5>
-        <input
-          type="text"
-          placeholder="Заголовок..."
-          class="form-control"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-default"
-        />
-        <input
-          type="text"
-          placeholder="Введите ваше сообщение..."
-          class="form-control"
-          aria-label="Sizing example input"
-          aria-describedby="inputGroup-sizing-lg"
-        />
-        <ul></ul>
-        <div class="bnts">
-          <button class="btn btn-primary">Создать тему</button>
-          <button class="btn btn-secondary">
-            <a href="../pages/forum.html">Отмена</a>
-          </button>
-        </div>
+        <form id="createTopicForm">
+          <div class="form-group">
+            <label for="topicTitle">Заголовок темы</label>
+            <input type="text" id="topicTitle" class="form-control" placeholder="Заголовок..." required />
+          </div>
+          <div class="form-group">
+            <label for="topicCategory">Категория</label>
+            <select id="topicCategory" class="form-control" required>
+              <option value="">Выберите категорию</option>
+              <option value="Криптовалюты">Криптовалюты</option>
+              <option value="Новости">Новости</option>
+              <option value="Трейдинг">Трейдинг</option>
+              <option value="Технологии">Технологии</option>
+              <option value="Прочее">Прочее</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="topicMessage">Сообщение</label>
+            <textarea id="topicMessage" class="form-control" rows="4" placeholder="Введите ваше сообщение..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="topicTags">Теги (через запятую)</label>
+            <input type="text" id="topicTags" class="form-control" placeholder="#тег1, #тег2" />
+          </div>
+          <div class="bnts">
+            <button type="submit" class="btn btn-primary">Создать тему</button>
+            <a href="../pages/forum.html" class="btn btn-secondary">Отмена</a>
+          </div>
+        </form>
       </div>
     </main>
 
@@ -96,5 +107,64 @@
       src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
     ></script>
     <script src="../js/index.js"></script>
+    <script>
+      // Бургер-меню
+      document.addEventListener('DOMContentLoaded', function() {
+        const burgerMenu = document.querySelector('.burger-menu');
+        const headerRight = document.querySelector('.header__right');
+        burgerMenu.addEventListener('click', function() {
+          this.classList.toggle('active');
+          headerRight.classList.toggle('active');
+        });
+      });
+      // Логика создания темы
+      document.getElementById('createTopicForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const title = document.getElementById('topicTitle').value.trim();
+        const category = document.getElementById('topicCategory').value;
+        const message = document.getElementById('topicMessage').value.trim();
+        const tagsRaw = document.getElementById('topicTags').value.trim();
+        if (!title || !category || !message) return;
+        // Получаем demoTopics из localStorage или window
+        let topics = [];
+        if (localStorage.getItem('forumTopics')) {
+          topics = JSON.parse(localStorage.getItem('forumTopics'));
+        } else if (window.demoTopics) {
+          topics = window.demoTopics;
+        }
+        // Новый id
+        const newId = topics.length ? Math.max(...topics.map(t => t.id || 0)) + 1 : 1;
+        // Формируем превью
+        const preview = message.length > 100 ? message.slice(0, 100) + '...' : message;
+        // Формируем теги
+        const tags = tagsRaw.split(',').map(t => t.replace(/[#\s]+/g, '').trim()).filter(Boolean);
+        // Добавляем тему
+        const newTopic = {
+          id: newId,
+          title,
+          category,
+          author: 'Вы',
+          date: 'только что',
+          preview,
+          replies: 0,
+          views: 0,
+          lastReply: 'только что',
+          tags
+        };
+        topics.unshift(newTopic);
+        localStorage.setItem('forumTopics', JSON.stringify(topics));
+        // Сохраняем стартовое сообщение для ветки
+        localStorage.setItem(`thread-arc-${newId}`, JSON.stringify([
+          {
+            author: 'Вы',
+            avatar: '../assets/img/avatar_profile.png',
+            date: 'только что',
+            text: message
+          }
+        ]));
+        // Перенаправляем на форум
+        window.location.href = '../pages/forum.html';
+      });
+    </script>
   </body>
 </html>

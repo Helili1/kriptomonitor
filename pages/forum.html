@@ -4,178 +4,145 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Форум</title>
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <!-- Font Awesome для иконок (например, для стрелок новостей) -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <!-- Slick Carousel CSS -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-    />
-    <!-- <link rel="stylesheet" href="./css/reset.css" /> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../css/forum.css" />
   </head>
   <body>
     <!-- Шапка сайта -->
     <header class="bg-light py-3">
       <nav class="header__nav">
-        <ul class="header__left">
-          <li>
-            <a href="../index.html"><h1>Криптомонитор</h1></a>
-          </li>
-        </ul>
+        <div class="header__left">
+          <a href="../index.html"><h1>Криптомонитор</h1></a>
+        </div>
         <ul class="header__right">
-          <li class="forum"><a href="../pages/forum.html">Форум</a></li>
-          <!-- <li>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-toggle="modal"
-                  data-target="#authModal"
-                >
-                  Авторизация
-                </button>
-              </li> -->
+          <li class="forum"><a href="forum.html">Форум</a></li>
           <li>
-            <a href="../pages/profile.html">
+            <a href="profile.html">
               <div class="user__profile">
-                <span class="user__nickname">user nickname</span>
-                <img
-                  class="user__avatar"
-                  src="../assets/img/avatar_profile.png"
-                  alt="avatar_user"
-                />
+                <span class="user__nickname" id="headerNickname">user nickname</span>
+                <img loading="lazy" class="user__avatar" id="headerAvatar" src="../assets/img/avatar_profile.png" alt="avatar_user" />
               </div>
             </a>
           </li>
         </ul>
       </nav>
     </header>
-    <main>
-      <!-- cекция категорий -->
-      <div class="category">
-        <button class="btn btn-primary">
-          <a href="../pages/create-arc.html">Cоздать тему</a>
-        </button>
-        <ul class="category__list">
-          <li>Категория 1</li>
-          <li>Категория 2</li>
-          <li>Категория 3</li>
-          <li>Категория 4</li>
-          <li>Категория 5</li>
-          <li>Категория 6</li>
-        </ul>
-      </div>
-      <!-- секция статьей -->
-      <div class="articles">
-        <input
-          type="text"
-          placeholder="Поиск по названию темы"
-          class="discussions-search form__input"
-        />
-        <ul class="articles__list">
-          <!-- вид одной статьи -->
-          <li>
-            <div class="discussion__item">
-              <div class="discussion__title">
-                <a href="../pages/example-arc.html"
-                  ><b>Помогите разобраться с валютами</b></a
-                >
-              </div>
-              <div class="discussion__text">
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Libero adipisci amet natus dolores asperiores aliquam quas
-                  repellat, nam sint ipsum nisi, veniam ipsa quasi hic omnis
-                  quisquam sunt fugit delectus.
-                </p>
-              </div>
-              <div class="discussion__info">
-                <div class="user__profile">
-                  <img
-                    class="user__avatar"
-                    src="../assets/img/avatar_profile.png"
-                    alt="avatar_user"
-                  />
-                  <span class="user__nickname">user nickname</span>
-                </div>
-                <span class="discussion__condition">категория 1</span>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="discussion__item">
-              <div class="discussion__title">
-                <a href="#"><b>Помогите разобраться с валютами</b></a>
-              </div>
-              <div class="discussion__text">
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Libero adipisci amet natus dolores asperiores aliquam quas
-                  repellat, nam sint ipsum nisi, veniam ipsa quasi hic omnis
-                  quisquam sunt fugit delectus.
-                </p>
-              </div>
-              <div class="discussion__info">
-                <div class="user__profile">
-                  <img
-                    class="user__avatar"
-                    src="../assets/img/avatar_profile.png"
-                    alt="avatar_user"
-                  />
-                  <span class="user__nickname">user nickname</span>
-                </div>
-                <span class="discussion__condition">категория 1</span>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="discussion__item">
-              <div class="discussion__title">
-                <a href="#"><b>Помогите разобраться с валютами</b></a>
-              </div>
-              <div class="discussion__text">
-                <p>
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Libero adipisci amet natus dolores asperiores aliquam quas
-                  repellat, nam sint ipsum nisi, veniam ipsa quasi hic omnis
-                  quisquam sunt fugit delectus.
-                </p>
-              </div>
-              <div class="discussion__info">
-                <div class="user__profile">
-                  <img
-                    class="user__avatar"
-                    src="../assets/img/avatar_profile.png"
-                    alt="avatar_user"
-                  />
-                  <span class="user__nickname">user nickname</span>
-                </div>
-                <span class="discussion__condition">категория 1</span>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </main>
 
-    <!-- Bootstrap и скрипты -->
+    <div class="forum-container container-fluid">
+      <div class="row">
+        <!-- Левая колонка: основной контент -->
+        <div class="col-lg-9 col-md-8 col-12 forum-main">
+          <div class="forum-controls d-flex flex-wrap align-items-center mb-4 gap-3">
+            <button class="btn btn-primary create-topic-btn" onclick="window.location.href='create-arc.html'">
+              <i class="fas fa-plus"></i> Создать тему
+            </button>
+            <div class="input-group forum-search">
+              <input type="text" class="form-control" id="searchInput" placeholder="Поиск по темам или авторам...">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" id="searchBtn"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+            <select class="custom-select w-auto ml-2" id="categoryFilter">
+              <option value="all">Все категории</option>
+              <option value="crypto">Криптовалюты</option>
+              <option value="новости">Новости</option>
+              <option value="трейдинг">Трейдинг</option>
+              <option value="технологии">Технологии</option>
+              <option value="прочее">Прочее</option>
+            </select>
+            <select class="custom-select w-auto ml-2" id="sortFilter">
+              <option value="newest">Сначала новые</option>
+              <option value="active">Активные</option>
+              <option value="popular">Популярные</option>
+              <option value="oldest">Сначала старые</option>
+            </select>
+          </div>
+          <!-- Список тем -->
+          <ul class="forum-topics-list" id="topicsList">
+            <!-- Пример карточки темы -->
+            <li class="topic-card">
+              <div class="topic-main">
+                <div class="topic-title"><a href="example-arc.html">Как выбрать криптовалюту для инвестиций?</a></div>
+                <div class="topic-meta">
+                  <span class="topic-category">Криптовалюты</span>
+                  <span class="topic-author"><i class="fas fa-user"></i> <b>CryptoFan</b></span>
+                  <span class="topic-date"><i class="far fa-clock"></i> 2 часа назад</span>
+                </div>
+                <div class="topic-preview">Обсуждаем критерии выбора перспективных монет, делимся опытом и советами для новичков...</div>
+              </div>
+              <div class="topic-stats">
+                <span title="Ответы"><i class="far fa-comment"></i> 12</span>
+                <span title="Просмотры"><i class="far fa-eye"></i> 340</span>
+                <span title="Последний ответ"><i class="fas fa-arrow-right"></i> 15 мин назад</span>
+              </div>
+            </li>
+            <li class="topic-card">
+              <div class="topic-main">
+                <div class="topic-title"><a href="#">Новости: Биткоин обновил максимум</a></div>
+                <div class="topic-meta">
+                  <span class="topic-category">Новости</span>
+                  <span class="topic-author"><i class="fas fa-user"></i> <b>NewsBot</b></span>
+                  <span class="topic-date"><i class="far fa-clock"></i> 1 час назад</span>
+                </div>
+                <div class="topic-preview">BTC превысил $70 000. Что это значит для рынка? Мнения экспертов и прогнозы...</div>
+              </div>
+              <div class="topic-stats">
+                <span title="Ответы"><i class="far fa-comment"></i> 8</span>
+                <span title="Просмотры"><i class="far fa-eye"></i> 210</span>
+                <span title="Последний ответ"><i class="fas fa-arrow-right"></i> 5 мин назад</span>
+              </div>
+            </li>
+            <!-- ...другие темы... -->
+          </ul>
+          <!-- Пагинация -->
+          <nav class="forum-pagination mt-4">
+            <ul class="pagination justify-content-center">
+              <li class="page-item disabled"><a class="page-link" href="#">Назад</a></li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Вперёд</a></li>
+            </ul>
+          </nav>
+        </div>
+        <!-- Правая колонка: боковая панель -->
+        <aside class="col-lg-3 col-md-4 col-12 forum-sidebar">
+          <div class="sidebar-block mb-4">
+            <h5 class="sidebar-title">Активные пользователи</h5>
+            <ul class="active-users-list">
+              <li><img src="../assets/img/avatar_profile.png" alt="avatar" class="sidebar-avatar"> <span>CryptoFan</span></li>
+              <li><img src="../assets/img/avatar_profile.png" alt="avatar" class="sidebar-avatar"> <span>NewsBot</span></li>
+              <li><img src="../assets/img/avatar_profile.png" alt="avatar" class="sidebar-avatar"> <span>TraderPro</span></li>
+            </ul>
+          </div>
+          <div class="sidebar-block mb-4">
+            <h5 class="sidebar-title">Популярные теги</h5>
+            <div class="sidebar-tags">
+              <span class="tag">#биткоин</span>
+              <span class="tag">#альткоины</span>
+              <span class="tag">#новости</span>
+              <span class="tag">#трейдинг</span>
+              <span class="tag">#технологии</span>
+              <span class="tag">#инвестиции</span>
+            </div>
+          </div>
+          <div class="sidebar-block">
+            <h5 class="sidebar-title">Статистика форума</h5>
+            <ul class="forum-stats">
+              <li><i class="far fa-comment"></i> Тем: <b>124</b></li>
+              <li><i class="far fa-comments"></i> Сообщений: <b>1 234</b></li>
+              <li><i class="fas fa-users"></i> Пользователей: <b>321</b></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Slick Carousel JS -->
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
-    ></script>
-    <script src="../js/index.js"></script>
+    <script src="../js/forum.js"></script>
   </body>
 </html>
