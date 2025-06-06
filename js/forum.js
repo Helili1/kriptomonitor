@@ -214,7 +214,57 @@ function applyFilters() {
   renderTopics();
 }
 
+// Добавляем демо-данные при первой загрузке
 document.addEventListener('DOMContentLoaded', () => {
+  // Проверяем, есть ли уже темы в localStorage
+  if (!localStorage.getItem('forumTopics')) {
+    const demoTopics = [
+      {
+        id: 'demo1',
+        title: 'Как начать инвестировать в криптовалюту?',
+        category: 'Инвестиции',
+        author: 'Эксперт',
+        date: '2024-03-15',
+        content: 'Криптовалютный рынок предлагает множество возможностей для инвестиций. Вот основные шаги для начинающих:\n\n1. Изучите основы блокчейна и криптовалют\n2. Выберите надежную биржу\n3. Начните с малых сумм\n4. Диверсифицируйте портфель\n5. Используйте холодное хранение',
+        tags: ['инвестиции', 'новичкам', 'советы'],
+        replies: [
+          {
+            author: 'Алексей',
+            date: '2024-03-16',
+            content: 'Отличная статья! Хотелось бы узнать больше о холодном хранении.'
+          }
+        ]
+      },
+      {
+        id: 'demo2',
+        title: 'Анализ перспектив DeFi в 2024 году',
+        category: 'DeFi',
+        author: 'Аналитик',
+        date: '2024-03-14',
+        content: 'DeFi продолжает развиваться быстрыми темпами. Основные тренды 2024 года:\n\n1. Рост TVL в протоколах\n2. Новые механизмы обеспечения безопасности\n3. Интеграция с традиционными финансами\n4. Развитие кросс-чейн решений',
+        tags: ['defi', 'анализ', 'тренды'],
+        replies: []
+      },
+      {
+        id: 'demo3',
+        title: 'Обзор новых NFT-проектов',
+        category: 'NFT',
+        author: 'Коллекционер',
+        date: '2024-03-13',
+        content: 'В этом месяце появилось несколько интересных NFT-проектов:\n\n1. Digital Art Gallery - платформа для цифровых художников\n2. GameFi Heroes - игра с NFT-персонажами\n3. Real Estate Tokens - токенизация недвижимости',
+        tags: ['nft', 'обзор', 'проекты'],
+        replies: [
+          {
+            author: 'Мария',
+            date: '2024-03-13',
+            content: 'Очень интересно про Real Estate Tokens. Можете подробнее рассказать?'
+          }
+        ]
+      }
+    ];
+    localStorage.setItem('forumTopics', JSON.stringify(demoTopics));
+  }
+
   renderTopics();
   document.getElementById('searchInput').addEventListener('input', applyFilters);
   document.getElementById('categoryFilter').addEventListener('change', applyFilters);
