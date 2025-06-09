@@ -46,8 +46,11 @@ class ProfileManager {
         document.getElementById('viewsCount').textContent = this.profileData.viewsCount;
         document.getElementById('notificationsToggle').checked = this.profileData.notifications;
         document.getElementById('privacyToggle').checked = this.profileData.privacy;
-        document.getElementById('headerNickname').textContent = this.profileData.displayName;
-        document.getElementById('headerAvatar').src = this.profileData.avatar;
+        // Обновляем шапку на всех страницах
+        const headerNickname = document.getElementById('headerNickname');
+        const headerAvatar = document.getElementById('headerAvatar');
+        if (headerNickname) headerNickname.textContent = this.profileData.displayName;
+        if (headerAvatar) headerAvatar.src = this.profileData.avatar;
     }
 
     // Настройка обработчиков событий

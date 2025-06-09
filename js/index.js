@@ -24,31 +24,89 @@ $(document).ready(function () {
     ],
   };
 
+  const COINGECKO_API_KEY = 'CG-56kAjpNgMLX2KvXsAQtfdtDs'; // Ключ CoinGecko пользователя
+  const COINMARKETCAP_API_KEY = 'b6bfa4b7-7e7e-4e7e-8e7e-7e7e7e7e7e7e'; // Демо-ключ, замените на свой
+  const CRYPTOCOMPARE_API_KEY = 'bb4039ed8dd766e676e5fbb71a7a26f280c1466bf3a899c4f0d48103ac7cdd7a';
+
+  async function fetchFromCoinGecko() {
+    const url = 'https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1';
+    const res = await fetch(url, {
+      headers: {
+        'x-cg-pro-api-key': COINGECKO_API_KEY
+      }
+    });
+    if (!res.ok) throw new Error('Ошибка CoinGecko');
+    return await res.json();
+  }
+
+  async function fetchFromCoinMarketCap() {
+    const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=10&convert=USD';
+    const res = await fetch(url, {
+      headers: {
+        'X-CMC_PRO_API_KEY': COINMARKETCAP_API_KEY
+      }
+    });
+    if (!res.ok) throw new Error('Ошибка CoinMarketCap');
+    const data = await res.json();
+    return data.data;
+  }
+
+  async function fetchFromCryptoCompare() {
+    const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD';
+    const res = await fetch(url, {
+      headers: {
+        'authorization': `Apikey ${CRYPTOCOMPARE_API_KEY}`
+      }
+    });
+    if (!res.ok) throw new Error('Ошибка CryptoCompare');
+    const data = await res.json();
+    return data.Data;
+  }
+
   // Функция заполнения таблицы
-  function fillTable(data) {
+  function fillTable(data, source) {
     const cryptoTableBody = $("#cryptoTableBody");
     cryptoTableBody.empty(); // Очищаем таблицу
-
-    data.forEach((crypto, index) => {
+    data.forEach((item, index) => {
+      let name, price, change;
+      if (source === 'source1') { // CoinGecko
+        name = (item?.name || '-') + ' (' + (item?.symbol ? item.symbol.toUpperCase() : '-') + ')';
+        price = item?.current_price !== undefined ? item.current_price : '-';
+        change = (item?.price_change_percentage_24h !== undefined)
+          ? ((item.price_change_percentage_24h > 0 ? '+' : '') + item.price_change_percentage_24h.toFixed(2) + '%')
+          : '-';
+      } else if (source === 'source2') { // CoinMarketCap
+        name = (item?.name || '-') + ' (' + (item?.symbol || '-') + ')';
+        price = item?.quote?.USD?.price !== undefined ? item.quote.USD.price.toFixed(2) : '-';
+        change = (item?.quote?.USD?.percent_change_24h !== undefined)
+          ? ((item.quote.USD.percent_change_24h > 0 ? '+' : '') + item.quote.USD.percent_change_24h.toFixed(2) + '%')
+          : '-';
+      } else if (source === 'source3') { // CryptoCompare
+        name = (item?.CoinInfo?.FullName || '-') + ' (' + (item?.CoinInfo?.Name || '-') + ')';
+        price = item?.RAW?.USD?.PRICE !== undefined ? item.RAW.USD.PRICE.toFixed(2) : '-';
+        change = item?.RAW?.USD?.CHANGEPCT24HOUR !== undefined
+          ? ((item.RAW.USD.CHANGEPCT24HOUR > 0 ? '+' : '') + item.RAW.USD.CHANGEPCT24HOUR.toFixed(2) + '%')
+          : '-';
+      }
       const row = `<tr>
                 <td>${index + 1}</td>
-                <td>${crypto.name}</td>
-                <td>${crypto.price}</td>
+                <td>${name}</td>
+                <td>${price}</td>
                 <td class="${
-                  crypto.change.startsWith("+") ? "change-up" : "change-down"
-                }">${crypto.change}</td>
+                  change.startsWith("+") ? "change-up" : "change-down"
+                }">${change}</td>
             </tr>`;
       cryptoTableBody.append(row);
     });
   }
 
   // Инициализация таблицы при загрузке
-  fillTable(dataSources.source1);
+  fillTable(dataSources.source1, 'source1');
 
   // Обработчик изменения источника данных
   $("#dataSource").change(function () {
     const source = $(this).val();
-    fillTable(dataSources[source]);
+    updateTable(source);
   });
 
   // Переменные для отслеживания направления сортировки
@@ -62,7 +120,7 @@ $(document).ready(function () {
 
     if (sortType === "default") {
       const source = $("#dataSource").val();
-      fillTable(dataSources[source]);
+      fillTable(dataSources[source], source);
       return;
     }
 
@@ -178,6 +236,18 @@ $(document).ready(function () {
       $("#registrationForm")[0].reset();
     }, 1000);
   });
+
+  async function updateTable(source) {
+    try {
+      let data = [];
+      if (source === 'source1') data = await fetchFromCoinGecko();
+      if (source === 'source2') data = await fetchFromCoinMarketCap();
+      if (source === 'source3') data = await fetchFromCryptoCompare();
+      fillTable(data, source);
+    } catch (e) {
+      $("#cryptoTableBody").html(`<tr><td colspan="4">Ошибка загрузки данных: ${e.message}</td></tr>`);
+    }
+  }
 });
 
 document.addEventListener('DOMContentLoaded', function() {
