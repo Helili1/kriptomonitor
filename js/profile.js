@@ -38,46 +38,32 @@ class ProfileManager {
 
     // Обновление UI
     updateUI() {
-        // Основные данные
         document.getElementById('displayName').textContent = this.profileData.displayName;
         document.getElementById('userEmail').textContent = this.profileData.email;
         document.getElementById('profileDescription').textContent = this.profileData.description;
         document.getElementById('avatarPreview').src = this.profileData.avatar;
-        
-        // Статистика
         document.getElementById('postsCount').textContent = this.profileData.postsCount;
         document.getElementById('viewsCount').textContent = this.profileData.viewsCount;
-        
-        // Настройки
         document.getElementById('notificationsToggle').checked = this.profileData.notifications;
         document.getElementById('privacyToggle').checked = this.profileData.privacy;
-        
-        // Обновление данных в шапке
         document.getElementById('headerNickname').textContent = this.profileData.displayName;
         document.getElementById('headerAvatar').src = this.profileData.avatar;
     }
 
     // Настройка обработчиков событий
     setupEventListeners() {
-        // Загрузка аватара
         document.getElementById('avatarInput').addEventListener('change', (e) => this.handleAvatarUpload(e));
-        
-        // Открытие модального окна
-        document.getElementById('editProfileModal').addEventListener('show.bs.modal', () => {
+        $('#editProfileModal').on('show.bs.modal', () => {
             document.getElementById('editDisplayName').value = this.profileData.displayName;
             document.getElementById('editEmail').value = this.profileData.email;
             document.getElementById('editDescription').value = this.profileData.description;
+            document.getElementById('editAvatar').value = '';
         });
-        
-        // Сохранение профиля
         document.getElementById('saveProfileButton').addEventListener('click', () => this.handleProfileSave());
-        
-        // Настройки
         document.getElementById('notificationsToggle').addEventListener('change', (e) => {
             this.profileData.notifications = e.target.checked;
             this.saveProfile();
         });
-        
         document.getElementById('privacyToggle').addEventListener('change', (e) => {
             this.profileData.privacy = e.target.checked;
             this.saveProfile();
@@ -105,13 +91,10 @@ class ProfileManager {
         const newDescription = document.getElementById('editDescription').value.trim();
         const editAvatarInput = document.getElementById('editAvatar');
         const newAvatarFile = editAvatarInput.files[0];
-        
         if (!newDisplayName || !newEmail) {
-            this.showNotification('Пожалуйста, заполните все обязательные поля', 'error');
+            this.showNotification('Пожалуйста, заполните имя и почту', 'error');
             return;
         }
-
-        // Если выбран новый аватар, читаем его и сохраняем, иначе сохраняем остальные поля сразу
         if (newAvatarFile) {
             const reader = new FileReader();
             reader.onload = (e) => {
@@ -121,9 +104,7 @@ class ProfileManager {
                 this.profileData.description = newDescription;
                 this.updateUI();
                 this.saveProfile();
-                // Сбросить поле выбора файла, чтобы можно было выбрать то же фото снова при необходимости
                 editAvatarInput.value = '';
-                // Закрываем модальное окно
                 $('#editProfileModal').modal('hide');
             };
             reader.readAsDataURL(newAvatarFile);
