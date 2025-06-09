@@ -25,42 +25,29 @@ $(document).ready(function () {
   };
 
   const COINGECKO_API_KEY = 'CG-56kAjpNgMLX2KvXsAQtfdtDs'; // Ключ CoinGecko пользователя
-  const COINMARKETCAP_API_KEY = 'b6bfa4b7-7e7e-4e7e-8e7e-7e7e7e7e7e7e'; // Демо-ключ, замените на свой
+  const COINMARKETCAP_API_KEY = '2bc7292c-8a26-4bd7-8a51-5f7d6ff2f8ad'; // Новый ключ CoinMarketCap пользователя
   const CRYPTOCOMPARE_API_KEY = 'bb4039ed8dd766e676e5fbb71a7a26f280c1466bf3a899c4f0d48103ac7cdd7a';
 
+  // Используем локальные серверные эндпоинты
   async function fetchFromCoinGecko() {
-    const url = 'https://pro-api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1';
-    const res = await fetch(url, {
-      headers: {
-        'x-cg-pro-api-key': COINGECKO_API_KEY
-      }
-    });
+    const url = 'http://localhost:3001/api/coingecko';
+    const res = await fetch(url);
     if (!res.ok) throw new Error('Ошибка CoinGecko');
     return await res.json();
   }
 
   async function fetchFromCoinMarketCap() {
-    const url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=10&convert=USD';
-    const res = await fetch(url, {
-      headers: {
-        'X-CMC_PRO_API_KEY': COINMARKETCAP_API_KEY
-      }
-    });
-    if (!res.ok) throw new Error('Ошибка CoinMarketCap');
-    const data = await res.json();
-    return data.data;
+    const url = 'http://localhost:3001/api/coinmarketcap';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Ошибка CoinMarketCap: ' + res.status);
+    return await res.json();
   }
 
   async function fetchFromCryptoCompare() {
-    const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD';
-    const res = await fetch(url, {
-      headers: {
-        'authorization': `Apikey ${CRYPTOCOMPARE_API_KEY}`
-      }
-    });
+    const url = 'http://localhost:3001/api/cryptocompare';
+    const res = await fetch(url);
     if (!res.ok) throw new Error('Ошибка CryptoCompare');
-    const data = await res.json();
-    return data.Data;
+    return await res.json();
   }
 
   // Функция заполнения таблицы
@@ -100,8 +87,8 @@ $(document).ready(function () {
     });
   }
 
-  // Инициализация таблицы при загрузке
-  fillTable(dataSources.source1, 'source1');
+  // Инициализация таблицы при загрузке — сразу реальные данные CoinGecko
+  updateTable('source1');
 
   // Обработчик изменения источника данных
   $("#dataSource").change(function () {
@@ -174,28 +161,30 @@ $(document).ready(function () {
   });
 
   // Инициализация карусели новостей с отступами
-  $(".news-carousel").slick({
-    dots: false,
-    infinite: true,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-    responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
+  if ($('.news-carousel').length) {
+    $('.news-carousel').slick({
+      dots: false,
+      infinite: true,
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      prevArrow: '<button type="button" class="slick-prev"></button>',
+      nextArrow: '<button type="button" class="slick-next"></button>',
+      responsive: [
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+          },
         },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+          },
         },
-      },
-    ],
-  });
+      ],
+    });
+  }
 
   // Обработчик клика по ссылке "Зарегистрироваться"
   $("#registerModal").on("shown.bs.modal", function () {
