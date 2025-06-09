@@ -181,7 +181,7 @@ $(document).ready(function () {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  // --- Бургер-меню ---
+  // --- Универсальный бургер-меню ---
   const burgerMenu = document.querySelector('.burger-menu');
   const headerRight = document.querySelector('.header__right');
   if (burgerMenu && headerRight) {
