@@ -24,31 +24,76 @@ $(document).ready(function () {
     ],
   };
 
+  const COINGECKO_API_KEY = 'CG-56kAjpNgMLX2KvXsAQtfdtDs'; // Ключ CoinGecko пользователя
+  const COINMARKETCAP_API_KEY = '2bc7292c-8a26-4bd7-8a51-5f7d6ff2f8ad'; // Новый ключ CoinMarketCap пользователя
+  const CRYPTOCOMPARE_API_KEY = 'bb4039ed8dd766e676e5fbb71a7a26f280c1466bf3a899c4f0d48103ac7cdd7a';
+
+  // Используем локальные серверные эндпоинты
+  async function fetchFromCoinGecko() {
+    const url = 'http://localhost:3001/api/coingecko';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Ошибка CoinGecko');
+    return await res.json();
+  }
+
+  async function fetchFromCoinMarketCap() {
+    const url = 'http://localhost:3001/api/coinmarketcap';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Ошибка CoinMarketCap: ' + res.status);
+    return await res.json();
+  }
+
+  async function fetchFromCryptoCompare() {
+    const url = 'http://localhost:3001/api/cryptocompare';
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Ошибка CryptoCompare');
+    return await res.json();
+  }
+
   // Функция заполнения таблицы
-  function fillTable(data) {
+  function fillTable(data, source) {
     const cryptoTableBody = $("#cryptoTableBody");
     cryptoTableBody.empty(); // Очищаем таблицу
-
-    data.forEach((crypto, index) => {
+    data.forEach((item, index) => {
+      let name, price, change;
+      if (source === 'source1') { // CoinGecko
+        name = (item?.name || '-') + ' (' + (item?.symbol ? item.symbol.toUpperCase() : '-') + ')';
+        price = item?.current_price !== undefined ? item.current_price : '-';
+        change = (item?.price_change_percentage_24h !== undefined)
+          ? ((item.price_change_percentage_24h > 0 ? '+' : '') + item.price_change_percentage_24h.toFixed(2) + '%')
+          : '-';
+      } else if (source === 'source2') { // CoinMarketCap
+        name = (item?.name || '-') + ' (' + (item?.symbol || '-') + ')';
+        price = item?.quote?.USD?.price !== undefined ? item.quote.USD.price.toFixed(2) : '-';
+        change = (item?.quote?.USD?.percent_change_24h !== undefined)
+          ? ((item.quote.USD.percent_change_24h > 0 ? '+' : '') + item.quote.USD.percent_change_24h.toFixed(2) + '%')
+          : '-';
+      } else if (source === 'source3') { // CryptoCompare
+        name = (item?.CoinInfo?.FullName || '-') + ' (' + (item?.CoinInfo?.Name || '-') + ')';
+        price = item?.RAW?.USD?.PRICE !== undefined ? item.RAW.USD.PRICE.toFixed(2) : '-';
+        change = item?.RAW?.USD?.CHANGEPCT24HOUR !== undefined
+          ? ((item.RAW.USD.CHANGEPCT24HOUR > 0 ? '+' : '') + item.RAW.USD.CHANGEPCT24HOUR.toFixed(2) + '%')
+          : '-';
+      }
       const row = `<tr>
                 <td>${index + 1}</td>
-                <td>${crypto.name}</td>
-                <td>${crypto.price}</td>
+                <td>${name}</td>
+                <td>${price}</td>
                 <td class="${
-                  crypto.change.startsWith("+") ? "change-up" : "change-down"
-                }">${crypto.change}</td>
+                  change.startsWith("+") ? "change-up" : "change-down"
+                }">${change}</td>
             </tr>`;
       cryptoTableBody.append(row);
     });
   }
 
-  // Инициализация таблицы при загрузке
-  fillTable(dataSources.source1);
+  // Инициализация таблицы при загрузке — сразу реальные данные CoinGecko
+  updateTable('source1');
 
   // Обработчик изменения источника данных
   $("#dataSource").change(function () {
     const source = $(this).val();
-    fillTable(dataSources[source]);
+    updateTable(source);
   });
 
   // Переменные для отслеживания направления сортировки
@@ -62,7 +107,7 @@ $(document).ready(function () {
 
     if (sortType === "default") {
       const source = $("#dataSource").val();
-      fillTable(dataSources[source]);
+      fillTable(dataSources[source], source);
       return;
     }
 
@@ -116,28 +161,30 @@ $(document).ready(function () {
   });
 
   // Инициализация карусели новостей с отступами
-  $(".news-carousel").slick({
-    dots: false,
-    infinite: true,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-    responsive: [
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
+  if ($('.news-carousel').length) {
+    $('.news-carousel').slick({
+      dots: false,
+      infinite: true,
+      slidesToShow: 2,
+      slidesToScroll: 1,
+      prevArrow: '<button type="button" class="slick-prev"></button>',
+      nextArrow: '<button type="button" class="slick-next"></button>',
+      responsive: [
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+          },
         },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+          },
         },
-      },
-    ],
-  });
+      ],
+    });
+  }
 
   // Обработчик клика по ссылке "Зарегистрироваться"
   $("#registerModal").on("shown.bs.modal", function () {
@@ -178,6 +225,18 @@ $(document).ready(function () {
       $("#registrationForm")[0].reset();
     }, 1000);
   });
+
+  async function updateTable(source) {
+    try {
+      let data = [];
+      if (source === 'source1') data = await fetchFromCoinGecko();
+      if (source === 'source2') data = await fetchFromCoinMarketCap();
+      if (source === 'source3') data = await fetchFromCryptoCompare();
+      fillTable(data, source);
+    } catch (e) {
+      $("#cryptoTableBody").html(`<tr><td colspan="4">Ошибка загрузки данных: ${e.message}</td></tr>`);
+    }
+  }
 });
 
 document.addEventListener('DOMContentLoaded', function() {

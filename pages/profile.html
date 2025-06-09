@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/header.css" />
     <link rel="stylesheet" href="../css/profile.css" />
-    <link rel="stylesheet" href="../css/forum.css" />
   </head>
   <body>
     <!-- Шапка сайта -->
@@ -25,10 +25,13 @@
         <ul class="header__right">
           <li class="forum"><a href="forum.html">Форум</a></li>
           <li>
-            <a href="profile.html">
+            <a href="profile.html" class="user__profile-link">
               <div class="user__profile">
-                <span class="user__nickname" id="headerNickname">user nickname</span>
                 <img loading="lazy" class="user__avatar" id="headerAvatar" src="../assets/img/avatar_profile.png" alt="avatar_user" />
+                <div class="user__info">
+                  <span class="user__nickname" id="headerNickname">user nickname</span>
+                  <span class="user__role">Вы</span>
+                </div>
               </div>
             </a>
           </li>
@@ -168,6 +171,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../js/header.js"></script>
     <script src="../js/profile.js"></script>
   </body>
 </html>

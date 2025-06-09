@@ -25,6 +25,7 @@
     />
     <link rel="stylesheet" href="../css/news.css" />
     <link rel="stylesheet" href="../css/forum.css" />
+    <link rel="stylesheet" href="../css/header.css" />
 
   </head>
   <body>
@@ -42,17 +43,19 @@
         <ul class="header__right">
           <li class="forum"><a href="forum.html">Форум</a></li>
           <li>
-            <a href="profile.html">
+            <a href="profile.html" class="user__profile-link">
               <div class="user__profile">
-                <span class="user__nickname" id="headerNickname">user nickname</span>
                 <img loading="lazy" class="user__avatar" id="headerAvatar" src="../assets/img/avatar_profile.png" alt="avatar_user" />
+                <div class="user__info">
+                  <span class="user__nickname" id="headerNickname">user nickname</span>
+                  <span class="user__role">Вы</span>
+                </div>
               </div>
             </a>
           </li>
         </ul>
       </nav>
     </header>
-
     <!-- основная часть сайта -->
     <main>
       <h2>Последние новости криптовалютного мира</h2>
@@ -171,6 +174,7 @@
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
     ></script>
+    <script src="../js/header.js"></script>
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         const filterButtons = document.querySelectorAll('.news-filter-btn');

@@ -1,0 +1,235 @@
+.header__nav {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    margin-inline: 200px;
+    padding: 20px 0;
+}
+
+.header__left h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4361ee;
+    margin: 0;
+}
+
+.header__right {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    align-items: center;
+}
+
+.forum {
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.user__profile-link {
+    display: flex;
+    align-items: center;
+    background: #f5f7fa;
+    border-radius: 40px;
+    padding: 8px 28px 8px 12px;
+    box-shadow: 0 2px 12px rgba(67, 97, 238, 0.10);
+    transition: box-shadow 0.2s, background 0.2s;
+    text-decoration: none;
+    margin-left: 16px;
+    min-width: 180px;
+}
+
+.user__profile-link:hover,
+.user__profile-link:focus {
+    background: #e9f0ff;
+    box-shadow: 0 4px 20px rgba(67, 97, 238, 0.16);
+}
+
+.user__profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+}
+
+.user__avatar {
+    object-fit: cover;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2.5px solid #4361ee;
+    box-shadow: 0 2px 8px rgba(67, 97, 238, 0.13);
+    background: #fff;
+    transition: border 0.2s;
+}
+
+.user__profile-link:hover .user__avatar {
+    border: 2.5px solid #3a56d4;
+}
+
+.user__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.15;
+}
+
+.user__nickname {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2b2d42;
+    letter-spacing: 0.01em;
+}
+
+.user__role {
+    font-size: 1.05rem;
+    color: #4361ee;
+    font-weight: 600;
+    margin-top: 3px;
+    letter-spacing: 0.01em;
+}
+
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.burger-menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #4361ee;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .header__nav {
+        margin-inline: 50px;
+    }
+}
+
+@media (max-width: 992px) {
+    .header__nav {
+        margin-inline: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header__nav {
+        margin-inline: 10px;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+
+    .header__right {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 20px;
+        flex-direction: column;
+        gap: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .header__right.active {
+        display: flex;
+    }
+
+    .forum {
+        font-size: 24px;
+    }
+
+    .user__profile-link {
+        padding: 10px 18px 10px 10px;
+        margin-left: 0;
+        justify-content: center;
+        min-width: 0;
+    }
+
+    .user__avatar {
+        width: 44px;
+        height: 44px;
+    }
+
+    .user__nickname {
+        font-size: 1.08rem;
+    }
+
+    .user__role {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .header__nav {
+        flex-direction: column;
+        gap: 10px;
+        margin-inline: 0;
+        padding: 10px 0;
+    }
+
+    .header__left h1 {
+        font-size: 1.5rem;
+    }
+
+    .user__profile-link {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 0;
+    }
+
+    .user__profile {
+        gap: 10px;
+    }
+}
+
+ul.header__right {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    align-items: center;
+}
+
+ul.header__right li {
+    margin: 0;
+    padding: 0;
+}
+
+ul.header__right a {
+    text-decoration: none;
+    color: #222b3a;
+    font-weight: 500;
+    font-size: 1.25rem;
+    transition: color 0.2s;
+}
+
+ul.header__right a:visited {
+    color: #222b3a;
+}
+
+ul.header__right a:hover {
+    text-decoration: none;
+    color: #4361ee;
+}
+
+ul.header__right a[href*='index.html']:hover,
+ul.header__right a[href='./'],
+ul.header__right a[href='/'] {
+    color: #23316e !important;
+}

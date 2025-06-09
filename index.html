@@ -22,34 +22,37 @@
     />
     <!-- <link rel="stylesheet" href="./css/reset.css" /> -->
     <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="../css/forum.css" />
+    <link rel="stylesheet" href="./css/header.css" />
 
   </head>
   <body>
-    <!-- Шапка сайта -->
-    <header class="bg-light py-3">
-      <nav class="header__nav">
-        <div class="header__left">
-          <a href="./index.html"><h1>Криптомонитор</h1></a>
-        </div>
-        <button class="burger-menu" aria-label="Меню">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <ul class="header__right">
-          <li class="forum"><a href="./pages/forum.html">Форум</a></li>
-          <li>
-            <a href="./pages/profile.html">
-              <div class="user__profile">
-                <span class="user__nickname" id="headerNickname">user nickname</span>
-                <img loading="lazy" class="user__avatar" id="headerAvatar" src="./assets/img/avatar_profile.png" alt="avatar_user" />
-              </div>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </header>
+<!-- Шапка сайта -->
+<header class="bg-light py-3">
+  <nav class="header__nav">
+    <div class="header__left">
+      <a href="index.html"><h1>Криптомонитор</h1></a>
+    </div>
+    <button class="burger-menu" aria-label="Меню">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="header__right">
+      <li class="forum"><a href="./pages/forum.html">Форум</a></li>
+      <li>
+        <a href="./pages/profile.html" class="user__profile-link">
+          <div class="user__profile">
+            <img loading="lazy" class="user__avatar" id="headerAvatar" src="./assets/img/avatar_profile.png" alt="avatar_user" />
+            <div class="user__info">
+              <span class="user__nickname" id="headerNickname">user nickname</span>
+              <span class="user__role">Вы</span>
+            </div>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
     <!-- Модальное окно авторизации -->
     <div
       class="modal fade"
@@ -280,7 +283,7 @@
         <label for="dataSource">Источник данных:</label>
         <select class="form-control" id="dataSource">
           <option value="source1">CoinGecko</option>
-          <option value="source2">Binance</option>
+          <option value="source2">CoinMarketCap</option>
           <option value="source3">CryptoCompare</option>
         </select>
       </div>
@@ -333,5 +336,6 @@
     <!-- Slick Carousel JS -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/header.js"></script>
   </body>
 </html>
