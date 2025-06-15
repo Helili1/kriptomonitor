@@ -42,10 +42,10 @@
       <li>
         <a href="./pages/profile.html" class="user__profile-link">
           <div class="user__profile">
-            <img loading="lazy" class="user__avatar" id="headerAvatar" src="./assets/img/avatar_profile.png" alt="avatar_user" />
+            <img loading="lazy" class="user__avatar" id="headerAvatar" src="./assets/img/avatar_default.png" alt="avatar_user" />
             <div class="user__info">
               <span class="user__nickname" id="headerNickname">user nickname</span>
-              <span class="user__role">Вы</span>
+              <span class="user__role" id="headerRole">Вы</span>
             </div>
           </div>
         </a>
@@ -63,9 +63,9 @@
       aria-hidden="true"
     >
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="authModalLabel">Авторизация</h5>
+        <div class="modal-content custom-modal">
+          <div class="modal-header custom-modal-header">
+            <h5 class="modal-title custom-modal-title" id="authModalLabel">Авторизация</h5>
             <button
               type="button"
               class="close"
@@ -117,7 +117,7 @@
               </p>
             </form>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer custom-modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
@@ -141,9 +141,9 @@
       aria-hidden="true"
     >
       <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="registerModalLabel">Регистрация</h5>
+        <div class="modal-content custom-modal">
+          <div class="modal-header custom-modal-header">
+            <h5 class="modal-title custom-modal-title" id="registerModalLabel">Регистрация</h5>
             <button
               type="button"
               class="close"
@@ -212,7 +212,7 @@
               </p>
             </form>
           </div>
-          <div class="modal-footer">
+          <div class="modal-footer custom-modal-footer">
             <button
               type="button"
               class="btn btn-secondary"
@@ -337,5 +337,52 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/header.js"></script>
+    <script src="js/auth.js"></script>
+    <style>
+      /* Стили для модальных окон регистрации и авторизации */
+      .modal-content.custom-modal {
+        border-radius: 14px;
+        box-shadow: 0 4px 24px rgba(67, 97, 238, 0.13);
+        border: none;
+        background: #fff;
+      }
+      .modal-header.custom-modal-header {
+        border-bottom: none;
+        padding-bottom: 0.5rem;
+        background: #f5f7fa;
+        border-radius: 14px 14px 0 0;
+      }
+      .modal-title.custom-modal-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+      .modal-footer.custom-modal-footer {
+        border-top: none;
+        padding-top: 0.5rem;
+        background: #f5f7fa;
+        border-radius: 0 0 14px 14px;
+      }
+      .form-group label {
+        font-weight: 500;
+        color: #2c3e50;
+      }
+      .form-control, .form-control-file {
+        font-size: 1.05rem;
+        border-radius: 6px;
+      }
+      .btn-primary {
+        background-color: #4361ee;
+        border-color: #4361ee;
+      }
+      .btn-primary:hover {
+        background-color: #3a56d4;
+        border-color: #3a56d4;
+      }
+      .text-danger {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
+    </style>
   </body>
 </html>

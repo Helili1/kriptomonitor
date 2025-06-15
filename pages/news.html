@@ -45,10 +45,10 @@
           <li>
             <a href="profile.html" class="user__profile-link">
               <div class="user__profile">
-                <img loading="lazy" class="user__avatar" id="headerAvatar" src="../assets/img/avatar_profile.png" alt="avatar_user" />
+                <img loading="lazy" class="user__avatar" id="headerAvatar" src="../assets/img/avatar_default.png" alt="avatar_user" />
                 <div class="user__info">
                   <span class="user__nickname" id="headerNickname">user nickname</span>
-                  <span class="user__role">Вы</span>
+                  <span class="user__role" id="headerRole">Вы</span>
                 </div>
               </div>
             </a>
@@ -222,5 +222,82 @@
         });
       });
     </script>
+    <!-- Модальные окна авторизации и регистрации (скопировано из index.html) -->
+    <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="authModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content custom-modal">
+          <div class="modal-header custom-modal-header">
+            <h5 class="modal-title custom-modal-title" id="authModalLabel">Авторизация</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="login">Логин</label>
+                <input type="text" class="form-control" id="login" placeholder="Введите логин" />
+              </div>
+              <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" class="form-control" id="password" placeholder="Введите пароль" />
+              </div>
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe" />
+                <label class="form-check-label" for="rememberMe">Запомнить меня</label>
+              </div>
+              <p>Нет аккаунта?
+                <a href="#" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Зарегистрироваться</a>
+              </p>
+            </form>
+          </div>
+          <div class="modal-footer custom-modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary">Войти</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content custom-modal">
+          <div class="modal-header custom-modal-header">
+            <h5 class="modal-title custom-modal-title" id="registerModalLabel">Регистрация</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="registrationForm">
+              <div class="form-group">
+                <label for="email">Почта</label>
+                <input type="email" class="form-control" id="email" placeholder="Введите почту" required />
+              </div>
+              <div class="form-group">
+                <label for="displayName">Отображаемое имя</label>
+                <input type="text" class="form-control" id="displayName" placeholder="Введите отображаемое имя" required />
+              </div>
+              <div class="form-group">
+                <label for="registerPassword">Пароль</label>
+                <input type="password" class="form-control" id="registerPassword" placeholder="Введите пароль" required />
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Подтвердите пароль</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Подтвердите пароль" required />
+              </div>
+              <div id="registerError" class="text-danger" style="display: none"></div>
+              <p>Уже есть аккаунт?
+                <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#authModal">Войти</a>
+              </p>
+            </form>
+          </div>
+          <div class="modal-footer custom-modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary" id="registerButton">Зарегистрироваться</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/auth.js"></script>
   </body>
 </html>
