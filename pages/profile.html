@@ -27,10 +27,10 @@
           <li>
             <a href="profile.html" class="user__profile-link">
               <div class="user__profile">
-                <img loading="lazy" class="user__avatar" id="headerAvatar" src="../assets/img/avatar_profile.png" alt="avatar_user" />
+                <img loading="lazy" class="user__avatar" id="headerAvatar" src="../assets/img/avatar_default.png" alt="avatar_user" />
                 <div class="user__info">
                   <span class="user__nickname" id="headerNickname">user nickname</span>
-                  <span class="user__role">Вы</span>
+                  <span class="user__role" id="headerRole">Вы</span>
                 </div>
               </div>
             </a>
@@ -51,7 +51,7 @@
         <div class="profile-sidebar" style="width: 320px;">
           <div class="avatar-container" style="display: flex; flex-direction: column; align-items: center;">
             <div class="avatar-upload" id="avatarUpload" style="position: relative;">
-              <img src="../assets/img/avatar_profile.png" alt="Аватар" id="avatarPreview" class="profile-avatar" />
+              <img src="../assets/img/avatar_default.png" alt="Аватар" id="avatarPreview" class="profile-avatar" />
               <div class="avatar-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; background: rgba(0,0,0,0.4); border-radius: 50%; opacity: 0; transition: opacity 0.2s; cursor: pointer;">
                 <i class="fas fa-camera" style="font-size: 2rem;"></i>
                 <span style="font-size: 1rem;">Изменить фото</span>
@@ -168,10 +168,103 @@
     <!-- Уведомления -->
     <div id="notificationContainer"></div>
 
+    <!-- Кнопка выхода внизу страницы -->
+    <div class="container text-center mt-5 mb-3">
+      <button id="logoutButtonProfile" class="btn btn-outline-primary">Выйти из аккаунта</button>
+    </div>
+
+    <!-- Модальные окна авторизации и регистрации (скопировано из index.html) -->
+    <div class="modal fade" id="authModal" tabindex="-1" role="dialog" aria-labelledby="authModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content custom-modal">
+          <div class="modal-header custom-modal-header">
+            <h5 class="modal-title custom-modal-title" id="authModalLabel">Авторизация</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="login">Логин</label>
+                <input type="text" class="form-control" id="login" placeholder="Введите логин" />
+              </div>
+              <div class="form-group">
+                <label for="password">Пароль</label>
+                <input type="password" class="form-control" id="password" placeholder="Введите пароль" />
+              </div>
+              <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe" />
+                <label class="form-check-label" for="rememberMe">Запомнить меня</label>
+              </div>
+              <p>Нет аккаунта?
+                <a href="#" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Зарегистрироваться</a>
+              </p>
+            </form>
+          </div>
+          <div class="modal-footer custom-modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary">Войти</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content custom-modal">
+          <div class="modal-header custom-modal-header">
+            <h5 class="modal-title custom-modal-title" id="registerModalLabel">Регистрация</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="registrationForm">
+              <div class="form-group">
+                <label for="email">Почта</label>
+                <input type="email" class="form-control" id="email" placeholder="Введите почту" required />
+              </div>
+              <div class="form-group">
+                <label for="displayName">Отображаемое имя</label>
+                <input type="text" class="form-control" id="displayName" placeholder="Введите отображаемое имя" required />
+              </div>
+              <div class="form-group">
+                <label for="registerPassword">Пароль</label>
+                <input type="password" class="form-control" id="registerPassword" placeholder="Введите пароль" required />
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Подтвердите пароль</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Подтвердите пароль" required />
+              </div>
+              <div id="registerError" class="text-danger" style="display: none"></div>
+              <p>Уже есть аккаунт?
+                <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#authModal">Войти</a>
+              </p>
+            </form>
+          </div>
+          <div class="modal-footer custom-modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            <button type="button" class="btn btn-primary" id="registerButton">Зарегистрироваться</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../js/header.js"></script>
     <script src="../js/profile.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const btn = document.getElementById('logoutButtonProfile');
+      if (btn) {
+        btn.addEventListener('click', async function() {
+          await fetch('http://127.0.0.1:3001/api/logout', { method: 'POST', credentials: 'include' });
+          window.location.href = '/';
+        });
+      }
+    });
+    </script>
+    <script src="../js/auth.js"></script>
   </body>
 </html>
